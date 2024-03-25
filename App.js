@@ -1,6 +1,3 @@
-// to use react from node_modules, we need to import it
-import React from "react";
-import ReactDOM from "react-dom/client";
 // const heading = React.createElement(
 //   "h1",
 //   {
