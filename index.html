@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>React</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Namastey React!</title>
+  </head>
+  <body>
     <div id="root">
-        <!-- <h1>Hello World!</h1> -->
+      <!-- Normal HTML -->
+      <!-- <h1>Hello World</h1> -->
+      <h1>Akshay is here!</h1>
+      <!-- this h1 will be replaced by the react element. -->
     </div>
-    <!-- <script>
-        var root=document.getElementById('root');
-        const heading = document.createElement('h1');
-        heading.innerHTML='Hello World from Javascript!';
-        root.appendChild(heading);
-    </script> -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
-    
-</body>
+    <!-- Using Javascript -->
+    <!-- <script>
+      var heading = document.createElement("h1");
+      heading.innerHTML = "Hello World from Javascript";
+      document.getElementById("root").appendChild(heading);
+    </script> -->
+
+    <!-- Using React -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <!-- <script>
+      const heading = React.createElement("h1", {}, "Hello World from React!");
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(heading);
+    </script> -->
+    <script src="App.js"></script>
+  </body>
 </html>
+
+<!-- Notes
+React.createElement(); takes 3 parameters:-
+1. Name of the tag
+2. Object containing attributes and values in hashmap form.
+3. Value or data in the tag
+
+ReactDOM.createRoot(); is used to create root like element root, it takes the document.getElementById() as a value.
+
+render(); is used to render elements into root -->
