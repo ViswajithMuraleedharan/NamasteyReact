@@ -22,20 +22,24 @@
     </script> -->
 
     <!-- Using React -->
-    <script
+    <!-- we can use react by installing it using npm by
+        npm install react
+     -->
+    <!-- <script
       crossorigin
       src="https://unpkg.com/react@18/umd/react.development.js"
     ></script>
     <script
       crossorigin
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-    ></script>
+    ></script> -->
     <!-- <script>
       const heading = React.createElement("h1", {}, "Hello World from React!");
       const root = ReactDOM.createRoot(document.getElementById("root"));
       root.render(heading);
     </script> -->
-    <script src="App.js"></script>
+    <!-- <script src="App.js"></script> here we will get an error that "@parcel/transformer-js: Browser scripts cannot have imports or exports." To avoid this we need to add type="module" to script tag as an attribute. -->
+    <script type="module" src="./App.js"></script>
   </body>
 </html>
 
