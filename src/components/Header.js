@@ -1,7 +1,21 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
+  console.log("Header Rendered");
+  //useEffect takes 2 arguments:- call back function and dependency array.
+  // useEffect(() => {
+  //   console.log("UseEffect rendered");
+  // });
+  // if no dependency array is given, the useEffect is called everytime the component is rendered
+  // useEffect(() => {
+  //   console.log("UseEffect rendered only once");
+  // }, []);
+  // if the the dependency array contains a useEffect constant, the useEffect will be called when that useState is updated.
+  useEffect(() => {
+    console.log("UseEffect rendered");
+  }, [btnName]);
   return (
     <div className="header">
       <div className="logo-container">
@@ -9,9 +23,15 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
           <li>Cart</li>
           <button
             className="login"
