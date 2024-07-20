@@ -1,5 +1,4 @@
 import { Component } from "react";
-// import User from "./User"; //User is a functional component
 import UserClass from "./UserClass";
 // const About = () => {
 class About extends Component {

@@ -1,31 +1,11 @@
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../utils/constants";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
   const { resid } = useParams();
-  useEffect(() => {
-    fetchMenu();
-    // "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=9.91850&lng=76.25580&restaurantId=12"
-  }, []);
+  const resInfo = useRestaurantMenu(resid);
 
-  const fetchMenu = async () => {
-    const data = await fetch(MENU_API + resid);
-    const json = await data.json();
-    // Check the actual API response structure and adjust the path if necessary
-    // console.log(json.data.cards[2].card.card.info);
-    const restaurant = json.data;
-    const items =
-      json.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards[2].card;
-    // console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards[2]);
-    // json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants[0];
-    if (restaurant) {
-      setResInfo(restaurant); // Assuming 'info' object contains name and cuisines
-    } else {
-      console.error("Restaurant data not found in the API response");
-    }
-  };
   if (resInfo === null) return <Shimmer />;
   const { name, cuisines, cloudinaryImageId, costForTwoMessage } =
     resInfo?.cards[2]?.card?.card?.info; // Provide default values or handle the case where resInfo is null
@@ -37,7 +17,6 @@ const RestaurantMenu = () => {
       <p>
         {cuisines.join(", ")} - {costForTwoMessage}
       </p>
-      {/* <h3>{costForTwo}</h3> */}
       <h2>Menu</h2>
       <ul>
         {itemCards.map((itemCard) => (
