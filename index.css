@@ -1,4 +1,4 @@
-#heading {
+/* #heading {
   color: red;
 }
 .header {
@@ -28,7 +28,6 @@
 .res-card {
   padding: 5px;
   width: 210px;
-  /* height: 490px; */
   border: 1px solid black;
   margin: 5px;
 }
@@ -66,4 +65,8 @@
 .user_card {
   padding: 10px;
   border: 1px solid black;
-}
+} */
+/* Using tailwind.css from here */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

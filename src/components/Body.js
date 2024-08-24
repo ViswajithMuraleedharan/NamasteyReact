@@ -33,11 +33,11 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="search-box border-solid border-black"
             value={searchText}
             // here the value of input tag is bound to the usestate abd its value is "", when typing the value is not updated in the usestate so it is not reflected in the input tag
             // to make the input value visible I need to change it in the usestate, so we need to use onchange to override usestate value
@@ -46,6 +46,7 @@ const Body = () => {
             }}
           />
           <button
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               const filteredList = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -56,19 +57,21 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating > 4.5
-            );
-            setFilteredRestaurant(filteredList); // Update the filtered list state
-          }}
-        >
-          Top Rated Button
-        </button>
+        <div className="search m-4 p-4 flex items-center">
+          <button
+            className="px-4 py-2 bg-gray-100 rounded-lg"
+            onClick={() => {
+              const filteredList = listOfRestaurants.filter(
+                (res) => res.info.avgRating > 4.5
+              );
+              setFilteredRestaurant(filteredList); // Update the filtered list state
+            }}
+          >
+            Top Rated Button
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredlistOfRestaurants.map((restaurant) => {
           return (
             <Link
