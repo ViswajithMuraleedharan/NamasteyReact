@@ -1,23 +1,21 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import userContext from "../utils/userContext";
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
-  console.log("Header Rendered");
   //useEffect takes 2 arguments:- call back function and dependency array.
   // useEffect(() => {
-  //   console.log("UseEffect rendered");
   // });
   // if no dependency array is given, the useEffect is called everytime the component is rendered
   // useEffect(() => {
-  //   console.log("UseEffect rendered only once");
   // }, []);
   // if the the dependency array contains a useEffect constant, the useEffect will be called when that useState is updated.
-  useEffect(() => {
-    console.log("UseEffect rendered");
-  }, [btnName]);
+  useEffect(() => {}, [btnName]);
+  const { loggedInUser } = useContext(userContext);
+
   return (
     <div className="flex justify-between bg-pink-100 shadow-lg mb-2 sm:bg-yellow-50">
       <div className="logo-container">
@@ -48,6 +46,7 @@ const Header = () => {
           >
             {btnName}
           </button>
+          <li className="px-4 font-bold">{loggedInUser}</li>
         </ul>
       </div>
     </div>

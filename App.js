@@ -10,5 +10,4 @@ const parent = React.createElement("div", { id: "parent" }, [
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-console.log(root); // gives a ReactDOM object.
 root.render(parent);

@@ -18,25 +18,17 @@ class UserClass extends Component {
   }
   //api calls from componentDidMount
   async componentDidMount() {
-    // console.log(this.props.name + " Child Component Did Mount");
     const data = await fetch(
       "https://api.github.com/users/ViswajithMuraleedharan"
     );
     const json = await data.json();
-    // console.log(json);
     this.setState({
       userInfo: json,
     });
-    console.log("Component Did Mount");
   }
-  componentDidUpdate() {
-    console.log("Component Did Update");
-  }
-  componentWillUnmount() {
-    console.log("Component Will Upmount");
-  }
+  componentDidUpdate() {}
+  componentWillUnmount() {}
   render() {
-    // console.log(this.props.name + " Child Rendering");
     const { name, location, avatar_url } = this.state.userInfo;
     return (
       <div className="user_card">
@@ -44,7 +36,6 @@ class UserClass extends Component {
         <button
           onClick={() => {
             // this.state.count++; // Never do this, as it may cause in consistancy in project and donot reflect the value
-            // console.log(this.state.count);
             this.setState({
               count: this.state.count + 1, // dont do this.state.count++
             });

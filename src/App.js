@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 //for routing
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -35,6 +35,7 @@ import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Error from "./components/Error";
 import Shimmer from "./components/Shimmer";
+import userContext from "./utils/userContext";
 // import Grocery from "./components/Grocery";
 //Chunking
 //Code splitting
@@ -46,13 +47,23 @@ import Shimmer from "./components/Shimmer";
 const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy(() => import("./components/About"));
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+  //Authentication
+  useEffect(() => {
+    const data = {
+      name: "Viswajith",
+    };
+    setUserName(data.name);
+  }, []);
   return (
-    <div className="app">
-      <Header />
-      {/* <Body /> */}
-      <Outlet />
-      {/*this will be replaced by the rendering component from childern routing */}
-    </div>
+    <userContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="app">
+        <Header />
+        {/* <Body /> */}
+        <Outlet />
+        {/*this will be replaced by the rendering component from childern routing */}
+      </div>
+    </userContext.Provider>
   );
 };
 const AppRouter = createBrowserRouter([

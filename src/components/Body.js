@@ -1,13 +1,16 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { WithPromototedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import userContext from "../utils/userContext";
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   let [filteredlistOfRestaurants, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const RestaurantCardWithPromoted = WithPromototedLabel(RestaurantCard);
+  const { loggedInUser, setUserName } = useContext(userContext);
   useEffect(() => {
     fetchData();
   }, []);
@@ -70,6 +73,16 @@ const Body = () => {
             Top Rated Button
           </button>
         </div>
+        <div className="search m-4 p-4 flex items-center">
+          <label>UserName :</label>
+          <input
+            value={loggedInUser}
+            className="border border-black p-2"
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          />
+        </div>
       </div>
       <div className="flex flex-wrap">
         {filteredlistOfRestaurants.map((restaurant) => {
@@ -78,7 +91,11 @@ const Body = () => {
               key={restaurant.info.id}
               to={"/restaurant/" + restaurant.info.id}
             >
-              <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+              {restaurant.info.avgRating > 4.5 ? (
+                <RestaurantCardWithPromoted resData={restaurant} />
+              ) : (
+                <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+              )}
             </Link>
           );
         })}
