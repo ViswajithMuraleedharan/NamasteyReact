@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // for childer routing, ie, showing one route inside another
 import { Outlet } from "react-router-dom";
+import { Provider } from "react-redux";
 /*
  * Header
  * - Logo
@@ -35,7 +36,9 @@ import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Error from "./components/Error";
 import Shimmer from "./components/Shimmer";
+import Cart from "./components/Cart";
 import userContext from "./utils/userContext";
+import appStore from "./utils/appStore";
 // import Grocery from "./components/Grocery";
 //Chunking
 //Code splitting
@@ -56,14 +59,16 @@ const AppLayout = () => {
     setUserName(data.name);
   }, []);
   return (
-    <userContext.Provider value={{ loggedInUser: userName, setUserName }}>
-      <div className="app">
-        <Header />
-        {/* <Body /> */}
-        <Outlet />
-        {/*this will be replaced by the rendering component from childern routing */}
-      </div>
-    </userContext.Provider>
+    <Provider store={appStore}>
+      <userContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <div className="app">
+          <Header />
+          {/* <Body /> */}
+          <Outlet />
+          {/*this will be replaced by the rendering component from childern routing */}
+        </div>
+      </userContext.Provider>
+    </Provider>
   );
 };
 const AppRouter = createBrowserRouter([
@@ -98,6 +103,10 @@ const AppRouter = createBrowserRouter([
             <Grocery />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         //meaning resid can be dynamic
